@@ -158,8 +158,8 @@
 
         <div
           class="g-recaptcha"
-          data-sitekey="6LcbobMqAAAAAG-Gblxc3Oknfl7IYH02G7gdbEya"
-          style="margin-top: 18px"
+          data-sitekey="6LcOqeArAAAAAMF29B1GKuESIZUgzkDBbvKmdYfR"
+          data-action="LOGIN"
         ></div>
 
         <UButton type="submit"> Submit </UButton>
@@ -170,7 +170,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormSubmitEvent, NavigationMenuItem } from "@nuxt/ui";
+import type { FormSubmitEvent } from "@nuxt/ui";
 import * as z from "zod";
 
 useHead({
@@ -224,6 +224,9 @@ const { $recaptchaLoaded, $recaptcha } = useNuxtApp();
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Get reCAPTCHA token from widget
   const token = (window as any).grecaptcha.getResponse();
+
+  console.log("Token: ", token);
+
   if (!token) {
     toast.add({
       title: "Validation error",
