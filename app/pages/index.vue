@@ -242,7 +242,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       method: "POST",
       body: {
         ...event.data, // fullName, email, phone, message
-        token,
+        captchaToken: token,
       },
     });
 
