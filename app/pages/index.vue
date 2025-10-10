@@ -219,13 +219,9 @@ type Schema = z.output<typeof schema>;
 
 const toast = useToast();
 
-const { $recaptchaLoaded, $recaptcha } = useNuxtApp();
-
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Get reCAPTCHA token from widget
   const token = (window as any).grecaptcha.getResponse();
-
-  console.log("Token: ", token);
 
   if (!token) {
     toast.add({
@@ -245,6 +241,11 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         captchaToken: token,
       },
     });
+
+    submitForm.fullName = "";
+    submitForm.email = "";
+    submitForm.phone = "";
+    submitForm.message = "";
 
     toast.add({
       title: "Success",
